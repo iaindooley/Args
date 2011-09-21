@@ -1,0 +1,54 @@
+Gets an argument from one or more arrays or the special
+global $argv using the Args::argv constant for use with
+command line arguements.
+
+You simply call Args::get() and pass in the name of the value
+and one or more arrays in which you expect it might exist.
+
+In order to name command line arguments, simply type them
+as:
+
+name=value
+
+For example:
+
+php index.php MyClass name="something here"
+
+The Args::get() method will return NULL if the argument
+doesn't exist, or the value present if it does (even if
+that value is empty).
+
+By default, empty arrays will return FALSE. You can change
+this behaviour by passing in an Closure as one of the arguments
+to override the default filter behaviour.
+
+USAGE:
+
+//die if 'name' is not present in POST 
+if(($something = Args::get('name',$_POST)) === NULL)
+    die('name is required');
+
+//die if 'name' is either not present or is empty
+//and don't get fooled by an empty array
+if(($something = Args::get('name',$_POST)) == FALSE)
+    die('name is required');
+
+//die if 'name' is not present or empty, but accept an
+//empty array by overriding the default filter
+if(($something = Args::get('name',$_POST,function($arg){return $arg;})) == FALSE)
+    die('name is required');
+else
+    print_r($something);
+
+//set a value to an empty string or the value present in 
+//either GET, POST or a named command line argument, treating
+//an empty array as FALSE
+$value = (string)Args::get('name',$_POST,$_GET,Args::argv);
+
+//get a value if it's present in GET or POST, even if that
+//value is an empty array (by overriding the default filter)
+$value = Args::get('name',$_POST,$_GET,function($arg){return $arg;});
+
+TEST WITH:
+
+php index.php TestArgs name="iain dooley"
