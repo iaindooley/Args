@@ -52,14 +52,17 @@
             global $argv;
             $ret = array();
 
-            foreach($argv as $arg)
+            if(is_array($argv))
             {
-                if(strpos($arg,'=') !== FALSE)
+                foreach($argv as $arg)
                 {
-                    $split = explode('=',$arg);
-                    $name = $split[0];
-                    $value = $split[1];
-                    $ret[$name] = $value;
+                    if(strpos($arg,'=') !== FALSE)
+                    {
+                        $split = explode('=',$arg);
+                        $name = $split[0];
+                        $value = $split[1];
+                        $ret[$name] = $value;
+                    }
                 }
             }
             
