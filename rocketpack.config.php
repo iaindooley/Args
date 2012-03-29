@@ -1,2 +1,2 @@
 <?php
-    rocketpack\Install::package('Args',array(0,1,0));
+    rocketpack\Install::package('Args',array(0,1,2));
