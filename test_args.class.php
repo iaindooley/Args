@@ -1,5 +1,5 @@
 <?php
-    class TestArgs implements rocketsled\Runnable
+    class TestArgs implements RocketSled\Runnable
     {
         public function run()
         {
