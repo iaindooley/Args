@@ -1,2 +1,2 @@
 <?php
-    rocketpack\Install::package('Args',array(0,1,2));
+    rocketpack\Install::package('https://github.com/iaindooley/Args',array(0,2,0));
